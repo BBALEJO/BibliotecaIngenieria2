@@ -1,5 +1,7 @@
 
 # Sistema de Gestión de Biblioteca
+## Alcance
+Fijándonos en los usuarios que tenemos en los requerimientos es necesario un login para separar permisos de cada uno, además de eso el catálogo de los libros debe estar disponible para consulta cuando se necesite, el catálogo debe ser diferente para cada usuario.
 
 ## 1. Tipo de recurso
 Biblioteca
