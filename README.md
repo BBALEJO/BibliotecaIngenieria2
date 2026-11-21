@@ -53,3 +53,51 @@ El sistema contará con diferentes roles de usuario (administrador, bibliotecari
 El sistema busca facilitar la administración de una biblioteca mediante la automatización de los préstamos, devoluciones, renovaciones, multas y control de disponibilidad de libros.
 
 Además, garantizará la gestión de usuarios mediante roles, la seguridad de la información y la disponibilidad del servicio desde diferentes dispositivos.
+
+## 6. Patrones de diseño implementados
+Patrones de diseño implementados
+
+## Factory Method
+
+Permite crear diferentes tipos de usuarios mediante creadores especializados, evitando concentrar toda la lógica de creación en una única clase.
+
+## Clases principales:
+
+UsuarioCreator
+AdministradorCreator
+BibliotecarioCreator
+UsuarioRegularCreator
+
+## Observer
+
+Permite notificar a los usuarios registrados en una lista de espera cuando un libro vuelve a estar disponible.
+
+## Clases principales:
+
+ObservadorDisponibilidad
+Libro
+ServicioListaEspera
+ListaEspera
+
+## State
+
+Permite representar los diferentes estados de un préstamo y controlar las operaciones permitidas según su situación.
+
+## Clases principales:
+
+EstadoPrestamo
+PrestamoActivo
+PrestamoVencido
+PrestamoDevuelto
+Préstamo
+
+## Strategy
+
+Permite separar la política de cálculo de multas del resto de la lógica del sistema, facilitando la incorporación de diferentes políticas.
+
+## Clases principales:
+
+PoliticaMulta
+MultaEstandar
+CalculadoraMulta
+Multa
