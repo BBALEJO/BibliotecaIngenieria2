@@ -55,49 +55,48 @@ El sistema busca facilitar la administración de una biblioteca mediante la auto
 Además, garantizará la gestión de usuarios mediante roles, la seguridad de la información y la disponibilidad del servicio desde diferentes dispositivos.
 
 ## 6. Patrones de diseño implementados
-Patrones de diseño implementados
 
-## Factory Method
+### Factory Method
 
 Permite crear diferentes tipos de usuarios mediante creadores especializados, evitando concentrar toda la lógica de creación en una única clase.
 
-## Clases principales:
+**Clases principales:**
 
-UsuarioCreator
-AdministradorCreator
-BibliotecarioCreator
-UsuarioRegularCreator
+- `UsuarioCreator`
+- `AdministradorCreator`
+- `BibliotecarioCreator`
+- `UsuarioRegularCreator`
 
-## Observer
+### Observer
 
 Permite notificar a los usuarios registrados en una lista de espera cuando un libro vuelve a estar disponible.
 
-## Clases principales:
+**Clases principales:**
 
-ObservadorDisponibilidad
-Libro
-ServicioListaEspera
-ListaEspera
+- `ObservadorDisponibilidad`
+- `Libro`
+- `ServicioListaEspera`
+- `ListaEspera`
 
-## State
+### State
 
 Permite representar los diferentes estados de un préstamo y controlar las operaciones permitidas según su situación.
 
-## Clases principales:
+**Clases principales:**
 
-EstadoPrestamo
-PrestamoActivo
-PrestamoVencido
-PrestamoDevuelto
-Préstamo
+- `EstadoPrestamo`
+- `PrestamoActivo`
+- `PrestamoVencido`
+- `PrestamoDevuelto`
+- `Prestamo`
 
-## Strategy
+### Strategy
 
 Permite separar la política de cálculo de multas del resto de la lógica del sistema, facilitando la incorporación de diferentes políticas.
 
-## Clases principales:
+**Clases principales:**
 
-PoliticaMulta
-MultaEstandar
-CalculadoraMulta
-Multa
+- `PoliticaMulta`
+- `MultaEstandar`
+- `CalculadoraMulta`
+- `Multa`
