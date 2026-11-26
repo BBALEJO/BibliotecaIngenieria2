@@ -253,15 +253,6 @@ La posibilidad de ejecutar directamente el JAR generado depende de la configurac
 - Automatización de procesos bibliotecarios.
 - Mejor administración de préstamos y devoluciones.
 
-## 13. Autores
-
-Proyecto académico desarrollado en el contexto de la Universidad Libre.
-
-## 14. Repositorio
-
-Código fuente:
-
-https://github.com/BBALEJO/BibliotecaIngenieria2
 
 ---
 
