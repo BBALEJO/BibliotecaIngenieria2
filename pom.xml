@@ -16,6 +16,15 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+   <dependencies>
+   <!-- JUnit Vintage Engine for JUnit 4 compatibility -->
+   <dependency>
+       <groupId>org.junit.vintage</groupId>
+       <artifactId>junit-vintage-engine</artifactId>
+       <version>5.9.1</version>
+       <scope>test</scope>
+   </dependency>
+   </dependencies>
 
     <build>
         <plugins>
