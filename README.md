@@ -1,129 +1,270 @@
 
-# Pruebas Unitarias – Clase Usuario
+# 📚 Sistema de Gestión Bibliotecaria – Universidad Libre
 
-## 1. Descripción
+## 1. Descripción del proyecto
 
-Este archivo contiene pruebas unitarias para verificar el correcto funcionamiento de la clase abstracta `Usuario`, perteneciente al paquete `com.unilibre.biblioteca.model`.
+El Sistema de Gestión Bibliotecaria es una aplicación de escritorio desarrollada en Java, orientada a facilitar la administración y gestión de los procesos de una biblioteca universitaria.
 
-Debido a que `Usuario` es una clase abstracta, se implementa una clase interna llamada `UsuarioConcretoStub`, que permite instanciar un objeto de prueba sin necesidad de modificar la clase original.
+El proyecto busca optimizar la gestión de usuarios, libros, préstamos, devoluciones y renovaciones, proporcionando una solución organizada, modular y escalable.
 
-Las pruebas se desarrollan utilizando **JUnit 5**.
+La aplicación implementa diferentes patrones de diseño que permiten mejorar la organización del código, promover la reutilización de componentes y facilitar el mantenimiento del sistema.
 
-## 2. Objetivos de las pruebas
+## 2. Objetivo general
 
-Se busca comprobar:
+Desarrollar un sistema de gestión bibliotecaria que permita administrar eficientemente los recursos bibliográficos y los procesos relacionados con el préstamo de libros, aplicando principios de programación orientada a objetos y patrones de diseño de software.
 
-- La correcta inicialización de los atributos de un usuario.
-- El funcionamiento de los métodos getters.
-- La implementación del método abstracto `obtenerRol()`.
-- El formato de salida del método `toString()`.
+## 3. Funcionalidades principales
 
-## 3. Estructura del código
+El sistema contempla los siguientes módulos:
 
-La clase de prueba contiene dos métodos principales:
+### Gestión de usuarios
+- Registro y administración de usuarios.
+- Identificación de diferentes tipos de usuarios.
+- Gestión de roles y permisos.
+- Administración de información personal.
 
-### Prueba 1: `debeInicializarAtributosYGetters()`
+### Gestión de libros
+- Registro de libros.
+- Consulta del catálogo bibliográfico.
+- Administración de información de los libros.
+- Control de disponibilidad de ejemplares.
 
-Verifica que los atributos del usuario se inicialicen correctamente y que los métodos getters devuelvan los valores esperados.
+### Gestión de préstamos
+- Registro de préstamos de libros.
+- Control de fechas de préstamo y vencimiento.
+- Seguimiento del estado de los préstamos.
+- Consulta del historial de préstamos.
 
-| Atributo | Valor esperado |
-|---|---|
-| ID | U-01 |
-| Nombre | Breiner Bonilla |
-| Correo | breiner@unilibre.edu.co |
-| Contraseña Hash | hash123 |
-| Rol | ROL_PRUEBA |
+### Gestión de devoluciones
+- Registro de devolución de libros.
+- Actualización de disponibilidad.
+- Control de préstamos vencidos.
 
-### Prueba 2: `toStringDebeFormatearNombreYRol()`
+### Renovaciones y multas
+- Gestión de renovaciones de préstamos.
+- Identificación de préstamos vencidos.
+- Aplicación de estrategias para el cálculo de multas.
 
-Comprueba que el método `toString()` concatene correctamente el nombre del usuario y su rol, separados por un guion.
-
-**Resultado esperado:**
-
-`Breiner Bonilla - ROL_PRUEBA`
+### Lista de espera y notificaciones
+- Administración de listas de espera.
+- Organización de solicitudes mediante una estructura FIFO.
+- Notificación a los usuarios cuando un libro vuelve a estar disponible.
 
 ## 4. Tecnologías utilizadas
 
-- Java.
-- JUnit 5.
-- Maven.
-- IntelliJ IDEA.
+| Tecnología | Descripción |
+|---|---|
+| Java 21 | Lenguaje de programación principal. |
+| Java Swing | Desarrollo de la interfaz gráfica de escritorio. |
+| Maven | Administración de dependencias y construcción del proyecto. |
+| SQLite | Base de datos local. |
+| IntelliJ IDEA | Entorno de desarrollo. |
+| JUnit 5 | Pruebas unitarias. |
+| Git y GitHub | Control de versiones y almacenamiento del código fuente. |
 
-## 5. Dependencia Maven
+## 5. Patrones de diseño implementados
 
-Para ejecutar las pruebas se requiere incluir JUnit 5 en el archivo `pom.xml`:
+El proyecto implementa cuatro patrones de diseño:
 
-```xml
-<dependency>
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter</artifactId>
-    <version>5.10.2</version>
-    <scope>test</scope>
-</dependency>
+### 5.1 Factory Method
+
+Permite crear diferentes tipos de usuarios mediante creadores especializados, evitando concentrar toda la lógica de creación en una única clase.
+
+Clases principales:
+
+- `UsuarioCreator`
+- `AdministradorCreator`
+- `BibliotecarioCreator`
+- `UsuarioRegularCreator`
+
+### 5.2 Observer
+
+Permite notificar a los usuarios registrados en una lista de espera cuando un libro vuelve a estar disponible.
+
+Este patrón establece una relación entre los objetos observadores y el objeto que genera los eventos, permitiendo que las notificaciones se realicen automáticamente.
+
+### 5.3 State
+
+Permite representar los diferentes estados por los que puede pasar un préstamo, encapsulando el comportamiento correspondiente a cada estado.
+
+Clases principales:
+
+- `EstadoPrestamo`
+- `PrestamoActivo`
+- `PrestamoDevuelto`
+- `PrestamoVencido`
+
+Este patrón facilita la administración de las transiciones de estado de los préstamos.
+
+### 5.4 Strategy
+
+Permite implementar diferentes estrategias para realizar operaciones del sistema, como el cálculo de multas, evitando que la lógica dependa de una única implementación.
+
+Su objetivo es facilitar la incorporación y modificación de reglas de negocio.
+
+## 6. Arquitectura del proyecto
+
+El sistema está organizado mediante paquetes que permiten separar las responsabilidades de sus componentes.
+
+Estructura general:
+
+```text
+BibliotecaIngenieria2/
+│
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── com/
+│   │           └── unilibre/
+│   │               └── biblioteca/
+│   │                   ├── model/
+│   │                   ├── ui/
+│   │                   ├── factory/
+│   │                   ├── observer/
+│   │                   ├── state/
+│   │                   ├── strategy/
+│   │                   └── Main.java
+│   │
+│   └── test/
+│       └── java/
+│           └── com/
+│               └── unilibre/
+│                   └── biblioteca/
+│
+├── pom.xml
+└── README.md
 ```
 
-## 6. Ubicación del archivo
+La estructura representa la organización lógica del proyecto y puede ampliarse a medida que se incorporen nuevos módulos.
 
-La clase de prueba debe estar ubicada en:
+## 7. Requisitos del sistema
 
-`src/test/java/com/unilibre/biblioteca/model/UsuarioTest.java`
+Para ejecutar el proyecto se requiere:
 
-## 7. Ejecución de las pruebas
+- Java JDK 21 o superior.
+- IntelliJ IDEA.
+- Apache Maven.
+- Git (opcional, para clonar el repositorio).
 
-Las pruebas pueden ejecutarse de dos maneras:
+## 8. Instalación y configuración
+
+### Paso 1. Clonar el repositorio
+
+Abrir una terminal y ejecutar:
+
+```bash
+git clone https://github.com/BBALEJO/BibliotecaIngenieria2.git
+```
+
+### Paso 2. Ingresar al proyecto
+
+```bash
+cd BibliotecaIngenieria2
+```
+
+### Paso 3. Abrir el proyecto
+
+Abrir IntelliJ IDEA y seleccionar la carpeta del proyecto.
+
+Esperar a que Maven detecte el archivo `pom.xml` y descargue las dependencias necesarias.
+
+### Paso 4. Verificar la versión de Java
+
+Ejecutar en la terminal:
+
+```bash
+java -version
+```
+
+Verificar que esté instalada la versión 21 o superior.
+
+### Paso 5. Compilar el proyecto
+
+Desde la terminal, ejecutar:
+
+```bash
+mvn clean compile
+```
+
+Este comando limpia los archivos compilados anteriormente y compila el código fuente.
+
+## 9. Ejecución de la aplicación
 
 ### Desde IntelliJ IDEA
 
 1. Abrir el proyecto.
-2. Ubicar `UsuarioTest.java`.
-3. Hacer clic derecho sobre el archivo.
-4. Seleccionar `Run 'UsuarioTest'`.
-5. Revisar los resultados en la ventana de ejecución.
+2. Ubicar la clase `Main.java`.
+3. Abrir el archivo.
+4. Identificar el método `main`.
+5. Hacer clic en el botón verde de ejecución.
+6. Esperar a que se inicie la aplicación.
 
-### Desde la terminal con Maven
+La clase principal se encuentra en:
 
-Ejecutar el siguiente comando desde la raíz del proyecto:
+`com.unilibre.biblioteca.Main`
+
+### Desde la terminal
+
+Si el proyecto tiene configurado el plugin Maven Exec, se puede ejecutar mediante:
+
+```bash
+mvn exec:java
+```
+
+## 10. Ejecución de pruebas unitarias
+
+El proyecto utiliza JUnit 5 para verificar el funcionamiento de sus componentes.
+
+Para ejecutar las pruebas desde Maven:
 
 ```bash
 mvn test
 ```
 
-Este comando compila y ejecuta las pruebas unitarias del proyecto.
+Para ejecutar una compilación completa:
 
-## 8. Resultados esperados
-
-Si las pruebas se ejecutan correctamente, Maven mostrará un resultado similar a:
-
-```text
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
-
-BUILD SUCCESS
+```bash
+mvn clean package
 ```
 
-Esto indica que las dos pruebas fueron ejecutadas satisfactoriamente.
+Este último comando compila el proyecto, ejecuta las pruebas y genera el paquete correspondiente.
 
-## 9. ¿Cómo ejecutar la aplicación completa?
+## 11. Construcción del proyecto
 
-Para ejecutar el sistema de biblioteca desde IntelliJ IDEA:
+Para generar el paquete de distribución:
 
-1. Abrir el proyecto en IntelliJ IDEA.
-2. Ubicar la clase `Main.java`.
-3. Abrir el archivo.
-4. Identificar el método `main`.
-5. Hacer clic en el botón verde de ejecución.
-6. Esperar a que el sistema inicie.
+```bash
+mvn package
+```
 
-### Comandos Maven
+El archivo generado se almacena en la carpeta:
 
-| Comando | Función |
-|---|---|
-| `mvn clean` | Limpia archivos compilados anteriores. |
-| `mvn test` | Ejecuta las pruebas unitarias. |
-| `mvn package` | Compila, ejecuta las pruebas y empaqueta el proyecto. |
-| `mvn exec:java` | Ejecuta la clase principal si está configurado el plugin correspondiente. |
+`target/`
 
-## 10. Importancia de las pruebas unitarias
+La posibilidad de ejecutar directamente el JAR generado depende de la configuración del empaquetado y de sus dependencias.
 
-Las pruebas permiten detectar errores en la inicialización de objetos, verificar el comportamiento de los métodos y garantizar que la clase `Usuario` cumpla con los resultados esperados.
+## 12. Beneficios de la implementación
 
-Además, facilitan el mantenimiento del sistema y reducen el riesgo de introducir errores al realizar modificaciones futuras.
+- Organización modular del código.
+- Aplicación de principios de programación orientada a objetos.
+- Implementación de patrones de diseño.
+- Separación de responsabilidades.
+- Facilidad de mantenimiento y escalabilidad.
+- Automatización de procesos bibliotecarios.
+- Mejor administración de préstamos y devoluciones.
+
+## 13. Autores
+
+Proyecto académico desarrollado en el contexto de la Universidad Libre.
+
+## 14. Repositorio
+
+Código fuente:
+
+https://github.com/BBALEJO/BibliotecaIngenieria2
+
+---
+
+**Universidad Libre**
+
+Proyecto de Ingeniería de Software.
